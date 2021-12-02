@@ -2,7 +2,6 @@ def get_input(file):
     with open(file) as file_in:
         return [line.strip().split(' ') for line in file_in]
 
-print(get_input('input.txt'))
 hpos = 0
 depth = 0
 aim = 0
