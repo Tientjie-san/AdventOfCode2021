@@ -4,29 +4,37 @@ def get_input(file):
 
 puzzle_input = get_input("input.txt")
 
-ones = 0
-zeros = 0
-
-gamma_rate = ""
-epsilon_rate = ""
+def most_occured_bit(pos, arr):
+    count = 0
+    for i in range(len(arr)):
+        if arr[i][pos] == '1':
+            count += 1
+    
+    if len(arr) - count <= count:
+        return "1"
+    else:
+        return "0" 
 
 binary_length = len(puzzle_input[0])
+puzzle_input_copy_oxygen = puzzle_input[:]
+puzzle_input_copy_co2 = puzzle_input[:]
 
 for i in range(binary_length):
     count = 0
-    for j in range(len(puzzle_input)):
-        count += int(puzzle_input[j][i])
-    if len(puzzle_input) - count < count:
-       gamma_rate += "1"
-    else:
-        gamma_rate += "0" 
+    
+    if len(puzzle_input_copy_oxygen) != 1:
+        most_occuring_oxy = most_occured_bit(i, puzzle_input_copy_oxygen)
+        puzzle_input_copy_oxygen = [number for number in puzzle_input_copy_oxygen if number[i] == most_occuring_oxy]
 
-for char in gamma_rate:
-    if char == "1":
-        epsilon_rate += "0"
-    else:
-        epsilon_rate += "1"
+    if len(puzzle_input_copy_co2) != 1:
+        most_occuring_co2 = most_occured_bit(i, puzzle_input_copy_co2)
+        puzzle_input_copy_co2 = [number for number in puzzle_input_copy_co2 if number[i] != most_occuring_co2]
 
-gamma_rate = int(gamma_rate,2)
-epsilon_rate = int(epsilon_rate, 2)
-print(gamma_rate * epsilon_rate)
+oxigen_rating = puzzle_input_copy_oxygen[0]
+co2_rating = puzzle_input_copy_co2[0]
+
+
+oxigen_rating = int(oxigen_rating,2)
+co2_rating = int(co2_rating, 2)
+
+print(oxigen_rating * co2_rating)
