@@ -2,60 +2,39 @@ def get_input(file):
     with open(file) as file_in:
         return [line.strip() for line in file_in]
 
-puzzle_input = get_input("example.txt")
-puzzle_input.sort()
-print(puzzle_input)
-bovengrens = len(puzzle_input) -1
-ondergrens = 0
-mid = ondergrens + (bovengrens-ondergrens) // 2
+puzzle_input = get_input("input.txt")
+
+def most_occured_bit(pos, arr):
+    count = 0
+    for i in range(len(arr)):
+        if arr[i][pos] == '1':
+            count += 1
+
+    if len(arr) - count <= count:
+        return "1"
+    else:
+        return "0" 
+
+binary_length = len(puzzle_input[0])
+puzzle_input_copy_oxygen = puzzle_input[:]
+puzzle_input_copy_co2 = puzzle_input[:]
+
+for i in range(binary_length):
+    count = 0
+
+    if len(puzzle_input_copy_oxygen) != 1:
+        most_occuring_oxy = most_occured_bit(i, puzzle_input_copy_oxygen)
+        puzzle_input_copy_oxygen = [number for number in puzzle_input_copy_oxygen if number[i] == most_occuring_oxy]
+
+    if len(puzzle_input_copy_co2) != 1:
+        most_occuring_co2 = most_occured_bit(i, puzzle_input_copy_co2)
+        puzzle_input_copy_co2 = [number for number in puzzle_input_copy_co2 if number[i] != most_occuring_co2]
+
+oxigen_rating = puzzle_input_copy_oxygen[0]
+co2_rating = puzzle_input_copy_co2[0]
 
 
-def find_oxy(ondergrens_oxy, bovengrens_oxy):
-    for i in range(len(puzzle_input[0])):
+oxigen_rating = int(oxigen_rating,2)
+co2_rating = int(co2_rating, 2)
 
-        if bovengrens_oxy - ondergrens_oxy == 1:
-            return puzzle_input[bovengrens_oxy]
-                
-        mid_oxy = ondergrens_oxy+ (bovengrens_oxy - ondergrens_oxy) // 2
-
-        if (bovengrens_oxy + 1 - ondergrens_oxy) % 2 == 0:
-            if puzzle_input[mid_oxy + 1][i] == '1':
-                ondergrens_oxy = mid_oxy 
-            else:
-                bovengrens_oxy = mid_oxy 
-        else:
-            if puzzle_input[mid_oxy][i] == '0':
-                bovengrens_oxy = mid_oxy
-            else: 
-                ondergrens_oxy = mid_oxy
-        
-        
-def find_co2(ondergrens_oxy, bovengrens_oxy):
-    for i in range(len(puzzle_input[0])):
-
-        if bovengrens_oxy - ondergrens_oxy == 1:
-            return puzzle_input[ondergrens]
-                
-
-        mid_oxy = ondergrens_oxy+ (bovengrens_oxy - ondergrens_oxy) // 2
-
-        print(f"bovengrens_oxy: {bovengrens_oxy}")
-        print(f"ondergrens_oxy: {ondergrens_oxy}")
-        print(f"mid_oxy: {mid_oxy}")
-
-        if (bovengrens_oxy + 1 - ondergrens_oxy) % 2 == 0:
-
-            if puzzle_input[mid_oxy + 1][i] == '0':
-                ondergrens_oxy = mid_oxy + 1
-            else:
-                bovengrens_oxy = mid_oxy -1
-        else:
-            if puzzle_input[mid_oxy][i] == '1':
-                bovengrens_oxy = mid_oxy
-            else: 
-                ondergrens_oxy = mid_oxy
-
-
-print(find_oxy(ondergrens, bovengrens))
-print(find_co2(ondergrens, bovengrens))
-
+print(oxigen_rating * co2_rating) 
