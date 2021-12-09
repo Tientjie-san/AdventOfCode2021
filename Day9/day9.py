@@ -81,7 +81,7 @@ for point in low_points:
     count = 1
     while queue:
 
-        point = queue.pop()
+        point = queue.popleft()
 
         up = (point[0], point[1]+1)
         down = (point[0], point[1]-1)
