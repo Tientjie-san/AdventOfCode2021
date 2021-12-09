@@ -52,7 +52,6 @@ for line in lines:
             break
 
     subtotal = ""
-    print(len(output_values))
     for output_value in output_values:
         
         output_value = set(output_value)
@@ -76,6 +75,6 @@ for line in lines:
             subtotal += "8"
         if output_value == nine:
             subtotal += "9"
-    print(subtotal)
     total += int(subtotal)
+
 print(total)
