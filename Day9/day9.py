@@ -76,8 +76,9 @@ basins = []
 
 for point in low_points:
     seen = set()
+    seen.add(point)
     queue = deque([point])
-    count = 0
+    count = 1
     while queue:
 
         point = queue.pop()
