@@ -75,14 +75,13 @@ for i in range(1, len(heightmap)-1):
 basins = []
 
 for point in low_points:
-    seen = set(point)
+    seen = set()
     queue = deque([point])
     count = 0
     while queue:
 
         point = queue.pop()
 
-        # add neighbours if not 9
         up = (point[0], point[1]+1)
         down = (point[0], point[1]-1)
         left = (point[0]-1, point[1])
@@ -103,87 +102,3 @@ for point in low_points:
 
 sorted_basins = sorted(basins, reverse=True)
 print(sorted_basins[0]*sorted_basins[1]*sorted_basins[2])
-
-
-
-
-
-
-# def move_up(x, y):
-
-#     count = 0
-
-#     for i in range(y-1, 0, -1):
-#         up = heightmap[i][x]
-#         if up != 9:
-#             count += 1
-#         else:
-#             return count
-#     return count
-
-# def move_down(x, y):
-
-#     count = 0
-#     for i in range(y + 1, len(heightmap)):
-#         down = heightmap[i][x]
-#         if down != 9:
-#             count += 1
-#         else:
-#             return count
-#     return count
-
-# def move_left(x, y):
-#     count = 0
-#     for i in range(x-1, 0,-1):
-#         left= heightmap[y][i]
-#         if left != 9:
-#             count += 1
-#             count += move_up(i, y)
-#             count += move_down(i, y)
-#         else:
-#             return count
-#     return count
-
-
-# def move_right(x, y):
-#     count = 0
-#     for i in range(x+1, width):
-#         right= heightmap[y][i]
-#         if right != 9:
-#             count += 1
-#             count += move_up(i, y)
-#             count += move_down(i, y)
-#         else:
-#             return count
-
-#     return count
-
-
-    
-# basins = []
-
-# for point in low_points:
-#     basins_size = 1
-#     horizontal_points = []
-
-#     # move up
-#     basins_size += move_up(point[0], point[1])
-    
-#     # move down
-#     basins_size += move_down(point[0], point[1])
-
-#     # move left
-
-#     basins_size += move_left(point[0], point[1])
-
-#     # move right
-
-#     basins_size += move_right(point[0], point[1])
-
-#     print(basins_size)
-#     basins.append(basins_size)
-
-# print(basins)
-# sorted_basins = sorted(basins, reverse=True)
-# print(sorted_basins)
-# print(sorted_basins[0] * sorted_basins[1] * sorted_basins[2])
