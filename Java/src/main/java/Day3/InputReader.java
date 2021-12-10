@@ -1,4 +1,4 @@
-package Day2;
+package Day3;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -7,14 +7,15 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputReader {
-    static ArrayList<ArrayList<String>> getInput(String file) throws IOException {
+    static ArrayList<String> getInput(String file) throws IOException {
         Scanner scanner = new Scanner(Paths.get(file));
-        ArrayList<ArrayList<String>> numbers = new ArrayList<ArrayList<String>>();
+        ArrayList<String> bytes = new ArrayList<String>();
 
         // we read the file until all lines have been read
         while (scanner.hasNextLine()) {
-            numbers.add(new ArrayList<String>(Arrays.asList(scanner.nextLine().split(" "))));
+            bytes.add(scanner.nextLine());
         }
-        return numbers;
+        return bytes;
     }
 }
+
